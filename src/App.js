@@ -2,20 +2,39 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// React-Redux 提供connect方法，用于从 UI 组件生成容器组件。connect的意思，就是将这两种组件连起来ass App extends Component
+import { connect } from 'react-redux';
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <span>{ this.props.value }</span>
+        <button onClick={ click }>Increase</button>
       </div>
     );
   }
 }
+
+const click = () =>{
+
+}
+const mapStateToprops = (state) =>{
+    return {
+        value: state.count
+    }
+};
+const mapDispathToprops = (dispath) =>{
+     return {
+      click:() => { dispath({
+         type:"ADD"
+       })}
+     }
+};
+
+App = connect(
+   mapStateToprops,
+   mapDispathToprops
+)(App)
+
 
 export default App;
